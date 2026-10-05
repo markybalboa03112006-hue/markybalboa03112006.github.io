@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Monthsary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{--c0:#26091F;--c1:#3B0D32;--c2:#5A1748;--c3:#7A245C;--pink:#E98BAF;--pink2:#FFB6CB;--cream:#FFF4E8;--gold:#D4AF37}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000;overflow:hidden;-webkit-tap-highlight-color:transparent}
+body{display:grid;place-items:center}
+.stage{position:relative;width:min(100vw,450px,calc(100vh*9/16));width:min(100vw,450px,calc(100dvh*9/16));aspect-ratio:9/16;container-type:size;overflow:hidden;background:var(--c0);isolation:isolate}
+.bg,.layer,.vignette,.fade{position:absolute;inset:0;pointer-events:none}
+.bg1{background:radial-gradient(ellipse at 50% 55%,var(--c2) 0%,var(--c1) 45%,var(--c0) 100%)}
+.bg2{background:radial-gradient(ellipse at 50% 60%,#9a2f74 0%,var(--c3) 30%,var(--c2) 60%,var(--c0) 100%);opacity:0;transition:opacity 1.6s ease-in-out}
+.glow{position:absolute;left:-10%;right:-10%;top:15%;height:14cqw;background:radial-gradient(ellipse at 50% 50%,rgba(255,214,140,.55),rgba(212,175,55,.18) 45%,transparent 70%);filter:blur(2cqw);opacity:0;transition:opacity 1.6s ease-in-out}
+.stage.mid .bg2,.stage.mid .glow{opacity:1}
+.vignette{background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(20,4,16,.6) 100%);z-index:9}
+.fade{background:#000;opacity:0;z-index:10;transition:opacity .7s ease-in}
+.stage.out .fade{opacity:1}
+.layer.back{z-index:1}.layer.front{z-index:6}
+
+/* hearts */
+.heart{position:absolute;color:var(--c);opacity:0;width:var(--s);height:var(--s);filter:blur(var(--b)) drop-shadow(0 0 1.2cqw rgba(255,150,190,.65));animation:drift var(--d) ease-in-out var(--dl) infinite;will-change:transform,opacity}
+.heart svg{display:block;width:100%;height:100%;fill:currentColor}
+@keyframes drift{
+ 0%{opacity:0;transform:translate3d(0,8cqh,0) rotate(var(--r0)) scale(.75)}
+ 18%{opacity:var(--o)}
+ 50%{transform:translate3d(calc(var(--dx)*.4),-6cqh,0) rotate(calc((var(--r0) + var(--r1))/2)) scale(1)}
+ 82%{opacity:var(--o)}
+ 100%{opacity:0;transform:translate3d(var(--dx),-22cqh,0) rotate(var(--r1)) scale(1.06)}}
+
+/* bokeh + sparks */
+.bk{position:absolute;border-radius:50%;width:var(--s);height:var(--s);background:var(--c);box-shadow:0 0 3cqw var(--c);filter:blur(var(--b));mix-blend-mode:screen;opacity:0;animation:bokeh var(--d) ease-in-out var(--dl) infinite}
+@keyframes bokeh{0%{opacity:0;transform:translate3d(0,4cqh,0) scale(.8)}50%{opacity:var(--o)}100%{opacity:0;transform:translate3d(var(--dx),-9cqh,0) scale(1.15)}}
+.spark{position:absolute;width:var(--s);height:var(--s);border-radius:50%;background:var(--cream);box-shadow:0 0 1.6cqw 2px var(--pink2);opacity:0;animation:twinkle var(--d) ease-in-out var(--dl) infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.5)}50%{opacity:var(--o);transform:scale(1)}}
+
+/* cake */
+.cake{position:absolute;left:50%;bottom:20cqw;width:84cqw;height:78cqw;margin-left:-42cqw;z-index:3;opacity:0;filter:blur(1.6cqw) brightness(.7);transform:translateY(8cqw) scale(.92);transition:opacity 2.6s ease-out,transform 2.6s cubic-bezier(.2,.7,.2,1),filter 2.6s ease-out}
+.cake.in{opacity:1;filter:blur(0) brightness(1) drop-shadow(0 0 5cqw rgba(233,139,175,.35));transform:none}
+.plate{position:absolute;left:-4cqw;right:-4cqw;bottom:0;height:13cqw;border-radius:50%;background:linear-gradient(180deg,#f7dd8f,var(--gold) 50%,#8a6a16);box-shadow:0 3cqw 5cqw rgba(0,0,0,.55),inset 0 .6cqw 0 #fff1b8}
+.tier{position:absolute;left:50%;width:var(--w);height:var(--h);bottom:var(--b);margin-left:calc(var(--w)/-2)}
+.t1{--w:80cqw;--h:22cqw;--b:6cqw}
+.t2{--w:58cqw;--h:18cqw;--b:27cqw}
+.t3{--w:38cqw;--h:15cqw;--b:44.5cqw}
+.side{position:absolute;inset:0;overflow:hidden;border-radius:0 0 50% 50%/0 0 calc(var(--w)*.08) calc(var(--w)*.08);
+ background:linear-gradient(90deg,rgba(60,8,40,.4),transparent 28%,rgba(255,255,255,.22) 44%,transparent 62%,rgba(60,8,40,.45)),linear-gradient(180deg,#f6a5c2,var(--pink) 60%,#cc5f8d);
+ box-shadow:inset 0 -1.3cqw 0 var(--gold),inset 0 -2.2cqw 2cqw rgba(120,20,70,.35)}
+.drip{position:absolute;left:0;right:0;top:0;height:6cqw;background:radial-gradient(ellipse 52% 88% at 50% 0,var(--cream) 94%,transparent 100%) 0 0/11.11% 100% repeat-x;filter:drop-shadow(0 .5cqw .4cqw rgba(120,20,70,.3))}
+.pearls{position:absolute;left:0;right:0;top:58%;height:2cqw;background:radial-gradient(circle,#fff0c0 28%,var(--gold) 38%,transparent 46%) 0 0/4.2cqw 2cqw repeat-x}
+.top{position:absolute;left:0;right:0;top:calc(var(--w)*-.08);height:calc(var(--w)*.16);border-radius:50%;background:radial-gradient(ellipse at 50% 40%,#fff 0%,var(--cream) 55%,#f3cfd9 100%);box-shadow:0 0 0 .5cqw rgba(212,175,55,.75),0 .4cqw 1cqw rgba(0,0,0,.25)}
+.candle{position:absolute;left:var(--x);top:var(--y);width:1.5cqw;height:8cqw;margin:-8cqw 0 0 -.75cqw;border-radius:.4cqw;background:repeating-linear-gradient(-30deg,var(--cream) 0 1.2cqw,var(--pink2) 1.2cqw 2.4cqw);box-shadow:0 0 .6cqw rgba(0,0,0,.3)}
+.candle b{position:absolute;left:50%;top:-3.4cqw;width:1.9cqw;height:3.4cqw;margin-left:-.95cqw;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;background:radial-gradient(ellipse at 50% 75%,#fff6c8 0%,#ffcf4a 45%,#ff8a1f 100%);box-shadow:0 0 2.4cqw 1cqw rgba(255,180,60,.6);transform-origin:50% 100%;animation:flame .55s ease-in-out infinite alternate}
+.candle:nth-child(2) b{animation-duration:.43s}.candle:nth-child(3) b{animation-duration:.5s}
+@keyframes flame{0%{transform:scale(1,1) rotate(-3deg)}50%{transform:scale(.92,1.08) rotate(2deg)}100%{transform:scale(1.04,.95) rotate(-1deg)}}
+
+/* title */
+.title{position:absolute;left:0;right:0;top:31%;margin:0;z-index:7;text-align:center;font:400 25cqw/.82 'Great Vibes','Snell Roundhand','Apple Chancery',cursive;color:var(--cream);pointer-events:none}
+.line{display:block;width:fit-content;margin:0 auto;padding:0 3cqw;text-shadow:0 0 1cqw rgba(212,175,55,.95),0 0 4cqw rgba(255,182,203,.6),0 .8cqw 1.4cqw rgba(38,9,31,.7);clip-path:inset(-30% 100% -30% -10%);opacity:0}
+.l2{margin-top:-1cqw;margin-left:auto}
+.stage.write .l1{animation:write 1.7s cubic-bezier(.5,0,.3,1) forwards,shine 3.4s ease-in-out 2s infinite}
+.stage.write .l2{animation:write 2s cubic-bezier(.5,0,.3,1) 1.2s forwards,shine 3.4s ease-in-out 3.2s infinite}
+@keyframes write{0%{opacity:1;clip-path:inset(-30% 100% -30% -10%)}100%{opacity:1;clip-path:inset(-30% -10% -30% -10%)}}
+@keyframes shine{0%,100%{filter:none}50%{filter:drop-shadow(0 0 1.4cqw rgba(255,226,150,.85))}}
+
+
+/* archery intro */
+.stage{touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair}
+.bow{position:absolute;left:9cqw;bottom:18cqw;width:16cqw;height:32cqw;z-index:5;transform-origin:50% 50%;transition:transform .12s ease-out,opacity 1.2s ease-in .8s;filter:drop-shadow(0 0 2cqw rgba(255,214,140,.55))}
+.bow svg{width:100%;height:100%;overflow:visible;animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2cqw)}}
+.stage.won .bow{opacity:0}
+#nocked{transition:opacity .15s}
+.target{position:absolute;left:0;top:0;width:13cqw;height:13cqw;margin:-6.5cqw 0 0 -6.5cqw;z-index:4;filter:drop-shadow(0 0 2.4cqw rgba(255,150,190,.85));transition:opacity .25s;will-change:transform}
+.target svg{width:100%;height:100%;animation:beat 1s ease-in-out infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.13)}}
+.target.hit{opacity:0}
+.arrow{position:absolute;left:0;top:0;width:13cqw;height:2.2cqw;margin:-1.1cqw 0 0 -13cqw;transform-origin:100% 50%;z-index:6;opacity:0;pointer-events:none;filter:drop-shadow(0 0 1cqw rgba(255,214,140,.7));will-change:transform}
+.arrow svg{width:100%;height:100%;display:block}
+.hint{position:absolute;left:0;right:0;bottom:5cqw;text-align:center;z-index:8;font:italic 4.2cqw/1.3 Georgia,'Times New Roman',serif;letter-spacing:.04em;color:rgba(255,244,232,.88);text-shadow:0 0 2cqw rgba(255,182,203,.6);pointer-events:none;transition:opacity .8s;animation:hintp 2.2s ease-in-out infinite}
+@keyframes hintp{0%,100%{opacity:.55}50%{opacity:1}}
+.stage.won .hint{opacity:0!important;animation:none}
+.pop{position:absolute;width:5cqw;height:5cqw;color:var(--c);z-index:7;pointer-events:none;filter:drop-shadow(0 0 1.2cqw rgba(255,150,190,.8))}
+.pop svg{display:block;width:100%;height:100%;fill:currentColor}
+.ring{position:absolute;width:6cqw;height:6cqw;margin:-3cqw 0 0 -3cqw;border-radius:50%;border:.8cqw solid rgba(255,230,170,.9);box-shadow:0 0 4cqw rgba(255,182,203,.9);z-index:7;pointer-events:none}
+
+@media (prefers-reduced-motion:reduce){.heart,.bk,.spark{animation-duration:calc(var(--d)*2)}}
+</style>
+</head>
+<body>
+<main class="stage" id="stage" aria-label="Happy Monthsary">
+  <div class="bg bg1"></div>
+  <div class="bg bg2"></div>
+  <div class="glow"></div>
+  <div class="layer" id="sparks"></div>
+  <div class="layer back" id="heartsBack"></div>
+  <div class="layer back" id="bokehBack"></div>
+
+
+  <div class="bow" id="bow">
+    <svg viewBox="0 0 60 120" aria-hidden="true">
+      <defs>
+        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1B8"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8A6A16"/></linearGradient>
+      </defs>
+      <path d="M22 4 Q60 60 22 116" fill="none" stroke="url(#gold)" stroke-width="3.6" stroke-linecap="round"/>
+      <path d="M23 8 Q55 60 23 112" fill="none" stroke="#FFF4E8" stroke-opacity=".55" stroke-width="1" stroke-linecap="round"/>
+      <ellipse cx="42" cy="60" rx="3" ry="9" fill="#FFF4E8" stroke="#D4AF37" stroke-width="1"/>
+      <polyline id="string" points="22,4 22,116" fill="none" stroke="#FFF4E8" stroke-opacity=".85" stroke-width=".9"/>
+      <g id="nocked"><line x1="6" y1="60" x2="52" y2="60" stroke="url(#gold)" stroke-width="1.6"/><polygon points="52,56.5 60,60 52,63.5" fill="#FFD76A"/><polygon points="6,60 1,56 4,60 1,64" fill="#FFB6CB"/></g>
+    </svg>
+  </div>
+  <div class="target" id="target"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22S2.6 15.8 2.6 9.2A5.3 5.3 0 0 1 12 6.2a5.3 5.3 0 0 1 9.4 3C21.4 15.8 12 22 12 22z" fill="#FF8FB3" stroke="#FFF4E8" stroke-width=".6"/><path d="M12 17.6S6.6 14 6.6 10.2a3 3 0 0 1 5.4-1.8 3 3 0 0 1 5.4 1.8c0 3.800-5.400 7.400-5.400 7.400z" fill="#FFD1DE"/><circle cx="12" cy="11.500" r="1.600" fill="#FF6F9F"/></svg></div>
+  <div class="arrow" id="arrow"><svg viewBox="0 0 130 22" preserveAspectRatio="none" aria-hidden="true"><line x1="10" y1="11" x2="118" y2="11" stroke="url(#gold)" stroke-width="3"/><polygon points="116,4 130,11 116,18" fill="#FFD76A"/><polygon points="0,3 16,11 0,19 6,11" fill="#FFB6CB"/><polygon points="8,5 20,11 8,17 12,11" fill="#FFF4E8"/></svg></div>
+  <div class="hint" id="hint">Tap to shoot the heart</div>
+
+  <div class="cake" id="cake">
+    <div class="plate"></div>
+    <div class="tier t1"><div class="side"><i class="drip"></i><i class="pearls"></i></div><div class="top"></div></div>
+    <div class="tier t2"><div class="side"><i class="drip"></i><i class="pearls"></i></div><div class="top"></div></div>
+    <div class="tier t3"><div class="side"><i class="drip"></i><i class="pearls"></i></div>
+      <div class="top">
+        <span class="candle" style="--x:28%;--y:34%"><b></b></span>
+        <span class="candle" style="--x:50%;--y:22%"><b></b></span>
+        <span class="candle" style="--x:72%;--y:34%"><b></b></span>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="title" aria-label="Happy Monthsary">
+    <span class="line l1" aria-hidden="true">Happy</span>
+    <span class="line l2" aria-hidden="true">Monthsary</span>
+  </h1>
+
+  <div class="layer front" id="bokehFront"></div>
+  <div class="layer front" id="heartsFront"></div>
+  <div class="vignette"></div>
+  <div class="fade"></div>
+</main>
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+  const $ = id => document.getElementById(id);
+  const layers = { back: $('heartsBack'), front: $('heartsFront'), bkB: $('bokehBack'), bkF: $('bokehFront'), sp: $('sparks') };
+  const bowEl = $('bow'), stringEl = $('string'), nockedEl = $('nocked'), targetEl = $('target'), arrowEl = $('arrow'), hint = $('hint');
+  const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21.2S3.6 15.6 3.6 9.6A4.7 4.7 0 0 1 12 7a4.7 4.7 0 0 1 8.4 2.6c0 6-8.4 11.6-8.4 11.6z"/></svg>';
+  const PINKS = ['#FFB6CB', '#E98BAF', '#FF9DBB', '#FFD1DE', '#F27FA6'];
+  const BOKEH = ['#FFB6CB', '#FFD9E4', '#F5D77A', '#FFF4E8', '#C9A8E8', '#E98BAF'];
+
+  function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  const span = (r, a, b) => a + r() * (b - a);
+
+  function addHeart(r, layer, t, o) {
+    const big = o.big !== undefined ? o.big : r() < 0.22;
+    const size = big ? span(r, 8, 13) : span(r, 3, 7.5);
+    const blur = big ? span(r, 0.5, 1.1) : (r() < 0.3 ? 0.35 : 0);
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerHTML = HEART;
+    h.style.cssText =
+      `left:${span(r, 2, 90).toFixed(1)}%;top:${span(r, 12, 88).toFixed(1)}%;` +
+      `--s:${size.toFixed(1)}cqw;--b:${blur}cqw;--c:${PINKS[Math.floor(r() * PINKS.length)]};` +
+      `--o:${span(r, .45, o.max || .95).toFixed(2)};--d:${span(r, 7, 12).toFixed(1)}s;--dl:${t.toFixed(2)}s;` +
+      `--dx:${span(r, -14, 14).toFixed(1)}cqw;--r0:${span(r, -25, 25).toFixed(0)}deg;--r1:${span(r, -40, 40).toFixed(0)}deg`;
+    layer.appendChild(h);
+  }
+
+  function buildIntro() {
+    Object.values(layers).forEach(l => l.innerHTML = '');
+    const r = rng(77);
+    for (let i = 0; i < 18; i++) {
+      const s = document.createElement('div');
+      s.className = 'spark';
+      s.style.cssText =
+        `left:${span(r, 2, 97).toFixed(1)}%;top:${span(r, 3, 96).toFixed(1)}%;--s:${span(r, .5, 1.3).toFixed(2)}cqw;` +
+        `--o:${span(r, .4, .9).toFixed(2)};--d:${span(r, 3, 6).toFixed(1)}s;--dl:${span(r, 0, 5).toFixed(1)}s`;
+      layers.sp.appendChild(s);
+    }
+    for (let i = 0; i < 6; i++) addHeart(r, layers.back, i * 0.6, { big: false, max: .6 }); // calm, faint hearts
+  }
+
+  function buildCelebration() {
+    const r = rng(1408);
+    const N = 40;
+    for (let i = 0; i < N; i++) {
+      const t = 0.3 + Math.pow(i / N, 1.35) * 9;
+      addHeart(r, r() < 0.38 ? layers.front : layers.back, t, {});
+    }
+    for (let i = 0; i < 26; i++) {
+      const t = 3 + (i / 26) * 4.5;
+      const b = document.createElement('div');
+      b.className = 'bk';
+      b.style.cssText =
+        `left:${span(r, 0, 94).toFixed(1)}%;top:${span(r, 5, 92).toFixed(1)}%;--s:${span(r, 3, 13).toFixed(1)}cqw;` +
+        `--b:${span(r, .3, 1.1).toFixed(2)}cqw;--c:${BOKEH[Math.floor(r() * BOKEH.length)]};--o:${span(r, .25, .6).toFixed(2)};` +
+        `--d:${span(r, 6, 10).toFixed(1)}s;--dl:${t.toFixed(2)}s;--dx:${span(r, -8, 8).toFixed(1)}cqw`;
+      (r() < 0.5 ? layers.bkB : layers.bkF).appendChild(b);
+    }
+  }
+
+  // ---------- game ----------
+  let state = 'aim', W = 0, H = 0, timers = [], raf = 0, last = 0, phase = 0, misses = 0, arrow = null;
+  const SPEED = () => W * 3.2;                      // arrow speed (px/s)
+  const bowC = () => ({ x: W * 0.17, y: H - W * 0.34 });
+  const at = (sec, fn) => timers.push(setTimeout(fn, sec * 1000));
+  const measure = () => { W = stage.clientWidth; H = stage.clientHeight; };
+  const heartAt = p => ({ x: W * (0.66 + 0.15 * Math.sin(p * 1.15)), y: H * (0.27 + 0.15 * Math.sin(p * 1.7 + 1.2)) });
+  let hp = { x: 0, y: 0 };
+
+  function aimBow(px, py) {
+    const c = bowC();
+    const a = Math.atan2(py - c.y, px - c.x);
+    bowEl.style.transform = `rotate(${a}rad)`;
+    return a;
+  }
+
+  function frame(ts) {
+    raf = requestAnimationFrame(frame);
+    const dt = Math.min((ts - (last || ts)) / 1000, 0.05); last = ts;
+    if (state === 'aim') {
+      phase += dt * (misses >= 3 ? 0.65 : 1);       // gentle assist after 3 misses
+      hp = heartAt(phase);
+      targetEl.style.transform = `translate(${hp.x}px,${hp.y}px)`;
+    }
+    if (arrow) {
+      const steps = 3, hitR = W * (misses >= 3 ? 0.1 : 0.078);
+      for (let i = 0; i < steps && arrow; i++) {
+        arrow.x += arrow.dx * SPEED() * dt / steps;
+        arrow.y += arrow.dy * SPEED() * dt / steps;
+        if (Math.hypot(arrow.x - hp.x, arrow.y - hp.y) < hitR) { hit(); return; }
+        if (arrow.x < -80 || arrow.x > W + 80 || arrow.y < -80 || arrow.y > H + 80) { miss(); break; }
+      }
+      if (arrow) arrowEl.style.transform = `translate(${arrow.x}px,${arrow.y}px) rotate(${arrow.a}rad)`;
+    }
+  }
+
+  function shoot(px, py) {
+    if (state !== 'aim' || arrow || arrowEl.dataset.busy) return;
+    const a = aimBow(px, py), c = bowC();
+    arrowEl.dataset.busy = '1';
+    stringEl.setAttribute('points', '22,4 6,60 22,116');       // draw the string
+    nockedEl.style.transform = 'translateX(-14px)';
+    setTimeout(() => {
+      if (state !== 'aim') return;
+      stringEl.setAttribute('points', '22,4 22,116');
+      nockedEl.style.opacity = 0; nockedEl.style.transform = '';
+      const dx = Math.cos(a), dy = Math.sin(a);
+      arrow = { x: c.x + dx * W * 0.1, y: c.y + dy * W * 0.1, dx, dy, a };
+      arrowEl.style.transition = 'none'; arrowEl.style.opacity = 1;
+      arrowEl.style.transform = `translate(${arrow.x}px,${arrow.y}px) rotate(${a}rad)`;
+    }, 110);
+  }
+
+  function miss() {
+    arrow = null; misses++;
+    arrowEl.style.transition = 'opacity .25s'; arrowEl.style.opacity = 0;
+    setTimeout(() => { delete arrowEl.dataset.busy; nockedEl.style.opacity = 1; }, 280);
+    hint.textContent = misses >= 3 ? 'Almost! Aim right at the heart' : 'Missed! Aim ahead of the heart';
+  }
+
+  function hit() {
+    arrow = null; state = 'won';
+    arrowEl.style.transition = 'opacity .3s'; arrowEl.style.opacity = 0;
+    targetEl.classList.add('hit');
+    burst(hp.x, hp.y);
+    stage.classList.add('won');
+    buildCelebration();
+    at(0.35, () => stage.classList.add('mid'));
+    at(1.0, () => $('cake').classList.add('in'));
+    at(6.5, () => stage.classList.add('write'));
+    at(11.5, () => stage.classList.add('out'));
+    at(12.2, () => { state = 'done'; });
+  }
+
+  function burst(x, y) {
+    const ring = document.createElement('div');
+    ring.className = 'ring'; ring.style.left = x + 'px'; ring.style.top = y + 'px';
+    stage.appendChild(ring);
+    ring.animate([{ transform: 'scale(.4)', opacity: 1 }, { transform: 'scale(9)', opacity: 0 }], { duration: 900, easing: 'ease-out' }).onfinish = () => ring.remove();
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'pop'; p.innerHTML = HEART;
+      p.style.cssText = `left:${x}px;top:${y}px;--c:${PINKS[i % 5]}`;
+      stage.appendChild(p);
+      const ang = i / 18 * Math.PI * 2 + Math.random() * .4, d = W * (.16 + Math.random() * .24);
+      p.animate([
+        { transform: 'translate(-50%,-50%) scale(.3)', opacity: 1 },
+        { transform: `translate(calc(-50% + ${Math.cos(ang) * d}px),calc(-50% + ${Math.sin(ang) * d}px)) scale(${.8 + Math.random()}) rotate(${Math.random() * 90 - 45}deg)`, opacity: 0 }
+      ], { duration: 1100, easing: 'cubic-bezier(.1,.7,.3,1)' }).onfinish = () => p.remove();
+    }
+  }
+
+  function reset() {
+    timers.forEach(clearTimeout); timers = [];
+    cancelAnimationFrame(raf); last = 0;
+    stage.classList.remove('mid', 'write', 'out', 'won');
+    $('cake').classList.remove('in');
+    stage.querySelectorAll('.pop,.ring').forEach(n => n.remove());
+    targetEl.classList.remove('hit');
+    arrow = null; delete arrowEl.dataset.busy; arrowEl.style.opacity = 0;
+    nockedEl.style.opacity = 1; nockedEl.style.transform = '';
+    stringEl.setAttribute('points', '22,4 22,116');
+    hint.textContent = 'Tap to shoot the heart';
+    state = 'aim'; misses = 0; phase = Math.random() * 6;
+    measure(); buildIntro();
+    aimBow(W * 0.62, H * 0.3);
+    raf = requestAnimationFrame(frame);
+  }
+
+  const local = e => { const r = stage.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  stage.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    if (state === 'done') { reset(); return; }
+    if (state === 'aim') { const [x, y] = local(e); shoot(x, y); }
+  });
+  stage.addEventListener('pointermove', e => {
+    if (state === 'aim' && !arrow && !arrowEl.dataset.busy && e.pointerType === 'mouse') { const [x, y] = local(e); aimBow(x, y); }
+  });
+  window.addEventListener('resize', measure);
+  reset();
+})();
+</script>
+</body>
+</html>
